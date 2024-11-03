@@ -6,7 +6,7 @@ plugins {
 	id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-version = '0.10.4'
+version = '0.10.5-SNAPSHOT'
 
 def ENV = System.getenv()
 version = version + (ENV.GITHUB_ACTIONS ? "" : "+local")
@@ -95,6 +95,15 @@ publishing {
 				credentials {
 					username ENV.MAVEN_USERNAME
 					password ENV.MAVEN_PASSWORD
+				}
+			}
+		}
+		if (ENV.SNAPSHOTS_MAVEN_URL) {
+			maven {
+				url ENV.SNAPSHOTS_MAVEN_URL
+				credentials {
+					username ENV.SNAPSHOTS_MAVEN_USERNAME
+					password ENV.SNAPSHOTS_MAVEN_PASSWORD
 				}
 			}
 		}
